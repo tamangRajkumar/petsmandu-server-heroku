@@ -4,9 +4,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": "16.13.0"
+  },
   "scripts": {
     "start": "node -r esm server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "npm run build"
   },
   "keywords": [],
   "author": "",

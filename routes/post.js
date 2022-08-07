@@ -20,6 +20,7 @@ import {
   deletePostComment,
   postCommentsDataOnly,
   addFavoritePost,
+  userSearchRequest
 } from "../controllers/post";
 
 router.post("/create-post", requireSignin, createPost);

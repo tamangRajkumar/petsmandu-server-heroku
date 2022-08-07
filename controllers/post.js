@@ -257,3 +257,29 @@ export const addFavoritePost = async (req, res) => {
     return res.json({ addedToFavoriteList: "true" });
   } catch (error) {}
 };
+
+// user search request
+export const userSearchRequest = async (req, res) => {
+  // console.log(req.body);
+  const { query } = req.params;
+  // console.log(query);
+  if (!query) return;
+  try {
+    const post = await Post.find({
+      $or: [
+        { title: { $regex: query, $options: "ix" } },
+        { description: { $regex: query, $options: "ix" } },
+        { category: { $regex: query, $options: "ix" } },
+        { address: { $regex: query, $options: "ix" } },
+      ],
+    })
+      .populate("postedBy", "_id fname lname image ")
+      .populate("comments.postedBy", "_id fname lname image")
+      .sort({ createdAt: -1 })
+      .limit(10);
+    console.log(post);
+    res.json(post);
+  } catch (error) {
+    console.log("Error is=> ", error);
+  }
+};

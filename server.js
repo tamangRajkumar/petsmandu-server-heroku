@@ -22,18 +22,7 @@ mongoose
   });
 
 // Middleware
-app.use(
-  compression({
-    level: 6,
-    threshold: 0,
-    filter: (req, res) => {
-      if (req.headers["x-no-compression"]) {
-        return false;
-      }
-      return compression.filter(req, res);
-    },
-  })
-);
+app.use(compression());
 app.use(cors());
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ extended: "true" }));
